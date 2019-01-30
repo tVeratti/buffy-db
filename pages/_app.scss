@@ -1,0 +1,15 @@
+html {
+  // For REM sizing, base 10
+  font-size: 10px;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 1.4rem;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}

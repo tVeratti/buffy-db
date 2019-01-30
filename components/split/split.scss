@@ -1,0 +1,114 @@
+@import '../_shared/colors';
+@import '../_shared/transitions';
+
+.split__wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.split {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.split__half {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  transition: clip-path cubic(1s);
+  backface-visibility: hidden;
+  z-index: 1;
+
+  &--active,
+  &--last-active {
+    z-index: 2;
+  }
+
+  &--active {
+    .split__background {
+      opacity: 0.6;
+    }
+    .split__text {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.split__content {
+  position: absolute;
+  top: 40%;
+  transform: translate(-50%, -50%);
+}
+
+.split__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.1;
+  transition: opacity cubic(0.8s);
+}
+
+.split__action {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.split__text {
+  font-family: 'Lobster', cursive;
+  font-size: 94px;
+  color: white;
+  text-shadow: 2px 2px 1px rgba(black, 0.5);
+  transition: transform cubic(0.2s);
+}
+
+// LEFT --------------------
+.split__half--left {
+  right: 0;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%, 0 100%);
+  background-color: $primary;
+
+  .split__content {
+    left: 25%;
+  }
+
+  .split__background {
+    background-image: url('https://drive.google.com/uc?id=1b-_BPBczQUanDfrmIMp8RIjTzCY4pnl4');
+  }
+
+  &.split__half--active {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 35% 100%, 0 100%);
+  }
+}
+
+// RIGHT --------------------
+.split__half--right {
+  clip-path: polygon(100% 0, 100% 0, 100% 100%, 0 100%, 0 100%);
+  background-color: $secondary;
+
+  .split__content {
+    left: 75%;
+  }
+
+  .split__background {
+    background-image: url('https://drive.google.com/uc?id=1m5PL2Du_msYjE84n_qdyip4l3AZO7UW4');
+  }
+
+  &.split__half--active {
+    clip-path: polygon(65% 0, 100% 0, 100% 100%, 0 100%, 0 100%);
+  }
+}

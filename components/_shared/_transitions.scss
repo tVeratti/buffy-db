@@ -1,0 +1,3 @@
+@function cubic($time: 0.2s) {
+  @return $time cubic-bezier(0.0, 0, 0.2, 1);
+}
