@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
+import Episodes from './episodes';
 
-export default class Episodes extends PureComponent {
-  render() {
-    return <div className="episodes" />;
-  }
-}
+export default () => {
+  return (
+    <div className="view view--episodes">
+      <Episodes />
+    </div>
+  );
+};
