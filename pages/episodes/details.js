@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 
-export default class Episode extends PureComponent {
+export default class Details extends PureComponent {
   render() {
     const { ...ep } = this.props;
     return (
-      <li className="episode">
+      <div className="details">
         <div>{ep.title}</div>
-      </li>
+      </div>
     );
   }
 }

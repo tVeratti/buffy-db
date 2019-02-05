@@ -7,12 +7,16 @@ import Episode from './episode';
 
 class Episodes extends PureComponent {
   render() {
+    const { episodes } = this.props;
+
     return (
       <div className="episodes">
         <Placeholder fallback={<Loading />}>
-          {this.props.episodes.map(e => (
-            <Episode key={e.number} {...e} />
-          ))}
+          <ul className="episodes__list">
+            {episodes.map(e => (
+              <Episode key={e.number} {...e} />
+            ))}
+          </ul>
         </Placeholder>
       </div>
     );
