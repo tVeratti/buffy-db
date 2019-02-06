@@ -18,15 +18,16 @@
     "contentful": "^7.0.5",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
-    "isomorphic-unfetch": "^3.0.0",
     "lodash": "^4.17.11",
     "mongoose": "^5.4.8",
     "next": "^7.0.2",
+    "node-fetch": "^2.3.0",
     "node-sass": "^4.11.0",
     "react": "^16.8.0-alpha.1",
     "react-cache": "^2.0.0-alpha.1",
     "react-dom": "^16.8.0-alpha.1",
-    "react-suspense-polyfill": "^1.0.2"
+    "react-suspense-polyfill": "^1.0.2",
+    "speakingurl": "^14.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^9.4.2",

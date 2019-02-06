@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import Link from 'next/link';
+import getSlug from 'speakingurl';
 
-export default ({ number, title }) => {
-  const uri = encodeURI(title);
+export default ({ title, number }) => {
   return (
     <li className="episode">
-      <Link href={`/episodes?number=${number}`} as={`/episodes/${title}`}>
+      <Link href={`/episodes?number=${number}`} as={`/episodes/${number}`}>
         <div>{title}</div>
       </Link>
     </li>

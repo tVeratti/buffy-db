@@ -14,10 +14,7 @@ const handle = app.getRequestHandler();
 const { MONGO_USERNAME, MONGO_PASSWORD, MONGO_CONNECTION } = process.env;
 const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_CONNECTION}`;
 
-mongoose.connect(
-  url,
-  { useNewUrlParser: true }
-);
+mongoose.connect(url, { useNewUrlParser: true });
 
 // Prepare NextJS App
 // =========================================
@@ -30,6 +27,11 @@ app
 
     // API Routes
     server.use('/api', require('./routes'));
+
+    // Masked routes
+    server.get('/episodes/:number', (req, res) => {
+      app.render(req, res, '/episodes', req.params);
+    });
 
     server.get('*', (req, res) => {
       return handle(req, res);

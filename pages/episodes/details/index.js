@@ -1,12 +1,19 @@
 import React, { PureComponent } from 'react';
+import { withRouter } from 'next/router';
+import getSlug from 'speakingurl';
 
-export default class Details extends PureComponent {
+class Details extends PureComponent {
   render() {
-    const { episodes } = this.props;
+    const { episodes, router } = this.props;
+    const episode = episodes.find(e => e.number == router.query.number);
+    if (!episode) return null;
+
     return (
       <div className="episodes__details">
-        <div>title</div>
+        <div>{episode.title}</div>
       </div>
     );
   }
 }
+
+export default withRouter(Details);
