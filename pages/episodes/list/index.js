@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { Placeholder } from 'react-suspense-polyfill';
 
 import Loading from '../../../components/loading';
 import Episode from './episode';
 
-export default ({ episodes }) => {
+export default ({ list: episodes }) => {
   return (
     <Placeholder fallback={<Loading />}>
       <ul className="episodes__list">

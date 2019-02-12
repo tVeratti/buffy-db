@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import getSlug from 'speakingurl';
 
 export default ({ title, number }) => {
   return (
