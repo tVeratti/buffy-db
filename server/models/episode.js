@@ -10,7 +10,16 @@ const episode = new Schema({
   teleplay_by: String,
   air_date: Date,
   use_viewers: Number,
-  teaser: String
+  teaser: String,
+  ratings: {
+    default: [],
+    type: [
+      {
+        user: String,
+        value: Number
+      }
+    ]
+  }
 });
 
 module.exports = mongoose.model('episode', episode);

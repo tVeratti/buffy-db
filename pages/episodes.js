@@ -1,24 +1,20 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, useReducer } from 'react';
 import { withRouter } from 'next/router';
 import Head from 'next/head';
 import memoize from 'memoize-one';
 
 import { get } from '../../util/api';
-import List from './list';
-import Details from './details';
+import Episodes from '../components/_pages/episodes';
 
-class Episodes extends PureComponent {
+class Page extends PureComponent {
   static getInitialProps = async ({ req, ...props }) => {
     const res = await get('/api/episodes', req);
     const episodes = await res.json();
     return { episodes };
   };
 
-  find = memoize((list, number) => list.find(e => e.number == number));
-
   render() {
-    const { episodes, router } = this.props;
-    const episode = this.find(episodes, router.query.number);
+    const { episodes: initial, router } = this.props;
 
     const title = episode
       ? `Buffy - [${episode.number}] ${episode.title}`
@@ -29,13 +25,10 @@ class Episodes extends PureComponent {
         <Head>
           <title>{title}</title>
         </Head>
-        <div className="view episodes">
-          <List list={episodes} active={episode} />
-          <Details list={episodes} active={episode} />
-        </div>
+        <Episodes number={router.query.number} />
       </React.Fragment>
     );
   }
 }
 
-export default withRouter(Episodes);
+export default withRouter(Page);
