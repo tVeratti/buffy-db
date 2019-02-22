@@ -7,7 +7,7 @@ export default class MyDocument extends Document {
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link
-            href="https://fonts.googleapis.com/css?family=Lobster"
+            href="https://fonts.googleapis.com/css?family=Laila"
             rel="stylesheet"
           />
         </Head>

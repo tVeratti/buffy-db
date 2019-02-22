@@ -4,7 +4,7 @@ import App, { Container } from 'next/app';
 import './_reset.scss';
 import './_app.scss';
 
-import Header from '../components/header';
+import Navigation from '../components/navigation';
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -22,8 +22,10 @@ export default class MyApp extends App {
 
     return (
       <Container>
-        <Header />
-        <Component {...pageProps} />
+        <div className="app">
+          <Navigation />
+          <Component {...pageProps} />
+        </div>
       </Container>
     );
   }

@@ -9,9 +9,11 @@ router.get('/', (req, res) => {
 });
 
 router.post('/rate', (req, res) => {
-  const { _id, rating } = req.params;
-  Episodes.rate(userId, _id, rating);
-  Episodes.one(_id).then(episode => res.json(episode));
+  const { _id, rating } = req.body;
+
+  Episodes.rate(_id, userId, rating)
+    .then(() => Episodes.one(_id, userId))
+    .then(episode => res.json(episode));
 });
 
 module.exports = router;

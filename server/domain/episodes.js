@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 const Episode = require('../models/episode');
 
-const aggregation = {
+const aggregation = userId => ({
   $project: {
     rating: {
       // Average rating (all)
@@ -25,7 +25,7 @@ const aggregation = {
               cond: { $eq: [userId, '$$this.user'] }
             }
           },
-          initialValue: -1,
+          initialValue: 0,
           in: '$$this.value'
         }
       },
@@ -44,19 +44,18 @@ const aggregation = {
     use_viewers: 1,
     teaser: 1
   }
-};
+});
 
-const all = userId => Episode.aggregate([aggregation]);
+const all = userId => Episode.aggregate([aggregation(userId)]);
 
-const one = _id => {
-  Episode.aggregate([{ $match: { _id: ObjectId(_id) } }, aggregation]);
-};
+const one = (_id, user) =>
+  Episode.aggregate([{ $match: { _id: ObjectId(_id) } }, aggregation(user)]);
 
-const rate = (userId, _id, rating) =>
-  Episode.findById(_id, (err, episode) => {
-    const ratings = episode.ratings.filter(r => r.user === userId);
-    episode.ratings = [...ratings, { user: userId, value: rating }];
-    episode.save();
+const rate = (_id, user, value) =>
+  Episode.findOne({ _id }).then(episode => {
+    const ratings = episode.ratings.filter(e => e.user != user);
+    episode.ratings = [...ratings, { user, value }];
+    return episode.save();
   });
 
-module.exports = { all, rate };
+module.exports = { all, one, rate };

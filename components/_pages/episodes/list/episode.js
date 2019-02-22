@@ -1,11 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
+import classnames from 'classnames';
 
-export default ({ title, number }) => {
+import './episode.scss';
+
+export default ({ title, number, isActive }) => {
+  const className = classnames('episode', {
+    'episode--active': isActive
+  });
   return (
-    <li className="episode">
+    <li>
       <Link href={`/episodes?number=${number}`} as={`/episodes/${number}`}>
-        <div>{title}</div>
+        <div className={className}>{title}</div>
       </Link>
     </li>
   );

@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import memoize from 'memoize-one';
+
+import { Context } from '../context';
 import Rating from './rating';
 
-export default ({ active: episode }) => {
+import './index.scss';
+
+const findEpisode = memoize((episodes, number) =>
+  episodes.find(e => e.number == number)
+);
+
+export default ({ active }) => {
+  const { episodes } = useContext(Context);
+  const episode = findEpisode(episodes, active);
+
   if (!episode) return null;
 
   return (

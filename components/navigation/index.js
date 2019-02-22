@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import './header.scss';
+import './navigation.scss';
 
 const Menu = () => {
   const paths = [
@@ -8,7 +8,7 @@ const Menu = () => {
   ];
 
   const pathNodes = paths.map((p, i) => (
-    <li key={i} className="header__item">
+    <li key={i} className="nav__item">
       <Link href={p.to}>
         <a>{p.label}</a>
       </Link>
@@ -16,8 +16,8 @@ const Menu = () => {
   ));
 
   return (
-    <div className="header">
-      <ul className="header__list">{pathNodes}</ul>
+    <div className="nav">
+      <ul className="nav__list">{pathNodes}</ul>
     </div>
   );
 };

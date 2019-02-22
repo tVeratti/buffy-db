@@ -1,9 +1,8 @@
-import React, { PureComponent, useReducer } from 'react';
+import React, { PureComponent } from 'react';
 import { withRouter } from 'next/router';
 import Head from 'next/head';
-import memoize from 'memoize-one';
 
-import { get } from '../../util/api';
+import { get } from '../util/api';
 import Episodes from '../components/_pages/episodes';
 
 class Page extends PureComponent {
@@ -14,18 +13,14 @@ class Page extends PureComponent {
   };
 
   render() {
-    const { episodes: initial, router } = this.props;
-
-    const title = episode
-      ? `Buffy - [${episode.number}] ${episode.title}`
-      : `Buffy Episodes List`;
+    const { episodes, router } = this.props;
 
     return (
       <React.Fragment>
         <Head>
-          <title>{title}</title>
+          <title>Buffy Database</title>
         </Head>
-        <Episodes number={router.query.number} />
+        <Episodes initial={episodes} number={router.query.number} />
       </React.Fragment>
     );
   }
