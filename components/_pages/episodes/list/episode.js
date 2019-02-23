@@ -10,8 +10,12 @@ export default ({ title, number, isActive }) => {
   });
   return (
     <li>
-      <Link href={`/episodes?number=${number}`} as={`/episodes/${number}`}>
-        <div className={className}>{title}</div>
+      <Link
+        href={`/episodes?number=${number}`}
+        as={`/episodes/${number}`}
+        passHref
+      >
+        <a className={className}>{title}</a>
       </Link>
     </li>
   );

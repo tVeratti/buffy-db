@@ -1,7 +1,12 @@
 @import '../../../_shared/base';
 
 .episode {
-  padding: 10px;
+  display: block;
+  width: 100%;
+  padding: 20px;
+  margin: 2px 0;
+  color: mix($primary, white, 50);
+  border-radius: 5px;
   cursor: pointer;
 
   &:hover {

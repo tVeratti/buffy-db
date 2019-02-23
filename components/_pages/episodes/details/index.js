@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import memoize from 'memoize-one';
+import padStart from 'lodash/padStart';
 
 import { Context } from '../context';
-import Rating from './rating';
+import General from './general';
+import Ratings from './ratings';
 
 import './index.scss';
 
@@ -17,10 +19,17 @@ export default ({ active }) => {
   if (!episode) return null;
 
   return (
-    <div key={episode.number} className="episodes__details">
-      <h2>{episode.title}</h2>
-      <h3>{episode.teaser}</h3>
-      <Rating {...episode} />
+    <div key={episode.number} className="episodes__details details">
+      <div className="details__header">
+        <div className="details__number">
+          ep.# <span>{padStart(episode.number, 3, '0')}</span>
+        </div>
+        <General {...episode} />
+      </div>
+
+      <div className="details__section">
+        <Ratings {...episode} />
+      </div>
     </div>
   );
 };

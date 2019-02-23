@@ -1,9 +1,5 @@
 @import '../_shared/colors';
 
-.nav {
-  background: $dark;
-}
-
 .nav__list {
   display: flex;
   align-items: center;
@@ -13,21 +9,9 @@
 }
 .nav__item {
   a {
-    display: inline-block;
     width: 100%;
     padding: 10px;
-    color: $secondary;
+    color: $dark;
     font-weight: bold;
-    text-decoration: none;
-    text-shadow: 1px 1px 0 rgba(black, 0.5);
-
-    &:visited,
-    &:link {
-      color: $secondary;
-    }
-
-    &:hover {
-      color: $base;
-    }
   }
 }

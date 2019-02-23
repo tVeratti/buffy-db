@@ -1,7 +1,15 @@
-.episodes__details {
-  padding: 20px;
+.details {
+  margin-left: 2rem;
+}
 
-  h2 {
-    font-size: 32px;
-  }
+.details__header {
+  display: flex;
+  margin-bottom: 3rem;
+  line-height: 1.3;
+}
+
+.details__section {
+  padding: 10px;
+  background: white;
+  border-radius: 5px;
 }

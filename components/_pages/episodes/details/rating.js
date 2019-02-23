@@ -1,15 +1,13 @@
 import React, { useContext, useState } from 'react';
 
-import { post } from '../../../../util/api';
 import { Context } from '../context';
+import { rate } from '../actions';
 
 import Star from './star';
 
 import './rating.scss';
 
-let timeout;
-
-export default ({ _id, rating }) => {
+export default ({ _id, rating, readonly }) => {
   const { dispatch } = useContext(Context);
   const [hover, setState] = useState(-1);
 
@@ -18,32 +16,27 @@ export default ({ _id, rating }) => {
   const stars = [...new Array(5)].map((s, i) => {
     const index = i + 1;
     const onHover = () => setState(index);
-    const onClick = () => {
-      post({
-        url: '/api/episodes/rate',
-        body: { _id, rating: index }
-      })
-        .then(res => res.json())
-        .then(res => {
-          dispatch({ type: 'RECEIVE_EPISODE', episode: res[0] });
-        });
-    };
+    const onClick = () => rate(_id, index, dispatch);
 
     return (
       <Star
         key={index}
-        index={index}
+        rating={index}
         hoverIndex={hover}
-        onClick={onClick}
-        onHover={onHover}
-        {...rating}
+        onClick={!readonly && onClick}
+        onHover={!readonly && onHover}
+        activeRating={rating}
+        readonly={readonly}
       />
     );
   });
 
   return (
-    <div className="rating" onMouseLeave={reset}>
+    <form className="rating" onMouseLeave={reset}>
       {stars}
-    </div>
+      <button type="submit" hidden>
+        Submit rating
+      </button>
+    </form>
   );
 };

@@ -1,8 +1,9 @@
 @import '../../../_shared/base';
 
 .episodes__list {
-  padding: 20px;
+  padding: 10px;
   max-height: 100%;
   background: $primary;
+  border-radius: 5px;
   overflow-y: auto;
 }

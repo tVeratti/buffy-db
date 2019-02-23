@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import './navigation.scss';
 
-const Menu = () => {
+const Navigation = () => {
   const paths = [
     { label: 'Home', to: '/' },
     { label: 'Episodes', to: '/episodes' }
@@ -9,7 +9,7 @@ const Menu = () => {
 
   const pathNodes = paths.map((p, i) => (
     <li key={i} className="nav__item">
-      <Link href={p.to}>
+      <Link href={p.to} passHref>
         <a>{p.label}</a>
       </Link>
     </li>
@@ -22,4 +22,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default Navigation;
