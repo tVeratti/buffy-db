@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const next = require('next');
+const nextAuth = require('next-auth');
+const nextAuthConfig = require('./next-auth.config.js');
 
 require('dotenv').config();
 
@@ -20,14 +22,15 @@ mongoose.connect(url, { useNewUrlParser: true });
 // =========================================
 app
   .prepare()
-  .then(() => {
+  .then(() => nextAuthConfig())
+  .then(nextAuthOptions => nextAuth(app, nextAuthOptions))
+  .then(nextAuthOptions => {
     const server = express();
     server.use(bodyParser.json());
     server.use(bodyParser.urlencoded({ extended: true }));
 
     // API Routes
     server.use('/api', require('./routes'));
-
     // Masked routes
     server.get('/episodes/:number', (req, res) => {
       app.render(req, res, '/episodes', req.params);
@@ -37,7 +40,7 @@ app
       return handle(req, res);
     });
 
-    server.listen(3000, err => {
+    server.listen(process.env.PORT || 3000, err => {
       if (err) throw err;
       console.log('> Ready on http://localhost:3000');
     });

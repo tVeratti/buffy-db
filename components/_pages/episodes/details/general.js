@@ -23,10 +23,6 @@ export default ({
           teleplay_by && { label: 'Teleplay by', content: teleplay_by }
         ]}
       />
-      {/* <Row label="Directed by" content={directed_by} />
-      {written_by && <Row label="Written by" content={written_by} />}
-      {story_by && <Row label="Story by" content={story_by} />}
-      {teleplay_by && <Row label="Teleplay by" content={teleplay_by} />} */}
     </div>
     <h3>{teaser}</h3>
   </div>

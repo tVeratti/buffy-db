@@ -18,6 +18,11 @@ const Navigation = () => {
   return (
     <div className="nav">
       <ul className="nav__list">{pathNodes}</ul>
+      <ul className="nav__user">
+        <li className="nav__item">
+          <a href="/auth/oauth/google">Login</a>
+        </li>
+      </ul>
     </div>
   );
 };

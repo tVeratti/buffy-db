@@ -1,6 +1,12 @@
 @import '../_shared/colors';
 
-.nav__list {
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav__list,
+.nav__user {
   display: flex;
   align-items: center;
   height: 100%;

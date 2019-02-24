@@ -9,11 +9,13 @@ class Page extends PureComponent {
   static getInitialProps = async ({ req, ...props }) => {
     const res = await get('/api/episodes', req);
     const episodes = await res.json();
+
     return { episodes };
   };
 
   render() {
-    const { episodes, router } = this.props;
+    const { episodes, router, user } = this.props;
+    console.log(user);
 
     return (
       <React.Fragment>
