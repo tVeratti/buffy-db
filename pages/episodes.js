@@ -14,8 +14,7 @@ class Page extends PureComponent {
   };
 
   render() {
-    const { episodes, router, user } = this.props;
-    console.log(user);
+    const { episodes, router } = this.props;
 
     return (
       <React.Fragment>

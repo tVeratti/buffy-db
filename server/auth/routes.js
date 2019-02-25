@@ -1,34 +1,39 @@
+const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
 
-module.exports = (app, passport) => {
-  // // Login View
-  // // ------------------------------
-  // router.get('/login', (req, res) => res.render('index', { user: '{}' }));
-
+module.exports = passport => {
   // Passport Authenticate
   // ------------------------------
-  app.get(
-    '/auth/google',
+  router.get(
+    '/google',
     passport.authenticate('google', {
-      scope: ['email', 'profile']
+      session: false,
+      scope: ['openid']
     })
   );
 
   // Callback after google has authenticated the user.
   // ------------------------------
-  app.get(
-    '/auth/callback',
+  router.get(
+    '/callback',
     passport.authenticate('google', {
-      successRedirect: '/',
-      failureRedirect: '/'
-    })
+      session: false
+    }),
+    (req, res) => {
+      const token = jwt.sign({ id: req.user._id }, process.env.JWT_SECRET);
+
+      res.cookie('user', token);
+      res.redirect('/');
+    }
   );
 
   // End session & logout
   // ------------------------------
-  app.get('/logout', (req, res) => {
-    req.logout();
+  router.get('/logout', (req, res) => {
+    res.clearCookie('user');
     res.redirect('/');
   });
+
+  return router;
 };

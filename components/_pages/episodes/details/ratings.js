@@ -12,11 +12,18 @@ export default ({ _id, rating }) => (
       rows={[
         {
           label: 'Average',
-          content: <Rating _id={_id} rating={rating.average} readonly={true} />
+          content: (
+            <Rating
+              _id={_id}
+              name="avg"
+              rating={rating.average}
+              readonly={true}
+            />
+          )
         },
         {
           label: 'You',
-          content: <Rating _id={_id} rating={rating.user} />
+          content: <Rating _id={_id} name="you" rating={rating.user} />
         }
       ]}
     />

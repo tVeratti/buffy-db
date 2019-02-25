@@ -5,6 +5,7 @@ import uniqueId from 'lodash/uniqueId';
 import './star.scss';
 
 export default ({
+  name,
   rating = 0,
   hoverIndex = 0,
   activeRating = 0,
@@ -12,7 +13,7 @@ export default ({
   onClick,
   readonly
 }) => {
-  const id = uniqueId(`star-${rating}`);
+  const id = `${name}__star--${rating}`;
 
   const className = classnames('star', {
     'star--active': rating <= activeRating,
@@ -21,8 +22,19 @@ export default ({
   });
 
   return (
-    <div className={className} onClick={onClick} onMouseOver={onHover}>
-      <input id={id} value={rating} hidden disabled={readonly} />
+    <div
+      className={className}
+      onMouseOver={(!readonly || undefined) && onHover}
+    >
+      <input
+        id={id}
+        name={name}
+        value={rating}
+        hidden
+        disabled={readonly}
+        onChange={onClick}
+        type="radio"
+      />
       <label htmlFor={id}>
         <span hidden>{rating} Stars</span>
         <svg width="100%" height="100%" viewBox="-2 -2 130 130">

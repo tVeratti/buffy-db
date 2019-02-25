@@ -7,7 +7,7 @@ import Star from './star';
 
 import './rating.scss';
 
-export default ({ _id, rating, readonly }) => {
+export default ({ _id, name, rating, readonly }) => {
   const { dispatch } = useContext(Context);
   const [hover, setState] = useState(-1);
 
@@ -21,10 +21,11 @@ export default ({ _id, rating, readonly }) => {
     return (
       <Star
         key={index}
+        name={name}
         rating={index}
         hoverIndex={hover}
-        onClick={!readonly && onClick}
-        onHover={!readonly && onHover}
+        onClick={onClick}
+        onHover={onHover}
         activeRating={rating}
         readonly={readonly}
       />

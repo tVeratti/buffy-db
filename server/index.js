@@ -1,36 +1,47 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+const passport = require('passport');
 const next = require('next');
-const nextAuth = require('next-auth');
-const nextAuthConfig = require('./next-auth.config.js');
 
 require('dotenv').config();
 
-const dev = process.env.NODE_ENV !== 'production';
+const {
+  NODE_ENV,
+  MONGO_USERNAME,
+  MONGO_PASSWORD,
+  MONGO_CONNECTION,
+  PORT
+} = process.env;
+
+const dev = NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
 // Connect to MongoDb
 // =========================================
-const { MONGO_USERNAME, MONGO_PASSWORD, MONGO_CONNECTION } = process.env;
 const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_CONNECTION}`;
-
 mongoose.connect(url, { useNewUrlParser: true });
 
 // Prepare NextJS App
 // =========================================
 app
   .prepare()
-  .then(() => nextAuthConfig())
-  .then(nextAuthOptions => nextAuth(app, nextAuthOptions))
-  .then(nextAuthOptions => {
+  .then(() => {
     const server = express();
     server.use(bodyParser.json());
     server.use(bodyParser.urlencoded({ extended: true }));
+    server.use(cookieParser(process.env.JWT_SECRET));
+
+    // Authentication
+    require('./auth/config')(passport);
+    server.use(passport.initialize());
+    server.use('/auth', require('./auth/routes')(passport));
 
     // API Routes
     server.use('/api', require('./routes'));
+
     // Masked routes
     server.get('/episodes/:number', (req, res) => {
       app.render(req, res, '/episodes', req.params);
@@ -40,7 +51,7 @@ app
       return handle(req, res);
     });
 
-    server.listen(process.env.PORT || 3000, err => {
+    server.listen(PORT || 3000, err => {
       if (err) throw err;
       console.log('> Ready on http://localhost:3000');
     });

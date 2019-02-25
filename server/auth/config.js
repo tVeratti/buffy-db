@@ -1,14 +1,12 @@
-const OAuth2Strategy = require('passport-google-oauth').OAuth2Strategy;
+const { OAuth2Strategy } = require('passport-google-oauth');
 
 const User = require('../models/user');
 
 const googleAuth = {
   clientID: process.env.GOOGLE_ID,
   clientSecret: process.env.GOOGLE_SECRET,
-  callbackURL: process.env.CALLBACK_URL
+  callbackURL: `${process.env.SERVER_URL}/auth/callback/`
 };
-
-console.log(googleAuth);
 
 module.exports = passport => {
   // Used to serialize the user for the session.
@@ -36,11 +34,7 @@ module.exports = passport => {
           if (user) return done(null, user);
 
           // Create new User.
-          const newUser = new User({
-            name: profile.displayName,
-            email: profile.emails[0].value,
-            google_id: profile.id
-          });
+          const newUser = new User({ google_id: profile.id });
 
           // Save the new user to the database.
           newUser.save(err => {

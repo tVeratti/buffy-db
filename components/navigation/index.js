@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import './navigation.scss';
 
-const Navigation = () => {
+const Navigation = ({ user }) => {
+  console.log(user);
   const paths = [
     { label: 'Home', to: '/' },
     { label: 'Episodes', to: '/episodes' }
@@ -20,7 +21,10 @@ const Navigation = () => {
       <ul className="nav__list">{pathNodes}</ul>
       <ul className="nav__user">
         <li className="nav__item">
-          <a href="/auth/oauth/google">Login</a>
+          {/* prettier-ignore */
+          user
+            ? <a href="/auth/logout">Logout</a>
+            : <a href="/auth/google">Login</a>}
         </li>
       </ul>
     </div>

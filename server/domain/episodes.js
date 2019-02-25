@@ -3,6 +3,19 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 const Episode = require('../models/episode');
 
+const userAggregation = userId => ({
+  $reduce: {
+    input: {
+      $filter: {
+        input: '$ratings',
+        cond: { $eq: [userId, '$$this.user'] }
+      }
+    },
+    initialValue: 0,
+    in: '$$this.value'
+  }
+});
+
 const aggregation = userId => ({
   $project: {
     rating: {
@@ -17,18 +30,7 @@ const aggregation = userId => ({
         }
       },
       // Current user's rating
-      user: {
-        $reduce: {
-          input: {
-            $filter: {
-              input: '$ratings',
-              cond: { $eq: [userId, '$$this.user'] }
-            }
-          },
-          initialValue: 0,
-          in: '$$this.value'
-        }
-      },
+      user: userId && userAggregation(userId),
       // Number of ratings
       count: { $size: '$ratings' }
     },

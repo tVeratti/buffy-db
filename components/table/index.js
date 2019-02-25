@@ -12,8 +12,8 @@ const Row = ({ label, content }) => (
 export default ({ rows }) => {
   return (
     <div className="table">
-      {rows.map(row => (
-        <Row {...row} />
+      {rows.map((row, i) => (
+        <Row key={i} {...row} />
       ))}
     </div>
   );
