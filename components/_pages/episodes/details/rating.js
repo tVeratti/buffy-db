@@ -7,7 +7,7 @@ import Star from './star';
 
 import './rating.scss';
 
-export default ({ _id, name, rating, readonly }) => {
+export default ({ _id, name, rating, count, readonly }) => {
   const { dispatch } = useContext(Context);
   const [hover, setState] = useState(-1);
 
@@ -35,6 +35,7 @@ export default ({ _id, name, rating, readonly }) => {
   return (
     <form className="rating" onMouseLeave={reset}>
       {stars}
+      {count !== undefined && <span className="subtle">{count} ratings</span>}
       <button type="submit" hidden>
         Submit rating
       </button>

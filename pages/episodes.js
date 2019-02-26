@@ -5,23 +5,38 @@ import Head from 'next/head';
 import { get } from '../util/api';
 import Episodes from '../components/_pages/episodes';
 
-class Page extends PureComponent {
-  static getInitialProps = async ({ req, ...props }) => {
-    const res = await get('/api/episodes', req);
-    const episodes = await res.json();
+const mapContent = initial => {
+  const content = {};
+  initial.items.forEach(c => {
+    try {
+      content[c.fields.id] = c.fields.screenshot.fields.file.url;
+    } catch (err) {}
+  });
+  return content;
+};
 
-    return { episodes };
+class Page extends PureComponent {
+  static getInitialProps = async ({ req, user, ...props }) => {
+    const res = await get('/api/episodes', req, user);
+
+    const { episodes, content: initialContent } = await res.json();
+    const content = mapContent(initialContent);
+
+    return { episodes, content };
   };
 
   render() {
-    const { episodes, router } = this.props;
+    const { episodes, content, router } = this.props;
 
     return (
       <React.Fragment>
         <Head>
           <title>Buffy Database</title>
         </Head>
-        <Episodes initial={episodes} number={router.query.number} />
+        <Episodes
+          initial={{ episodes, content }}
+          number={router.query.number}
+        />
       </React.Fragment>
     );
   }

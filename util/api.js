@@ -5,14 +5,21 @@ const baseUrl = (url, req) => {
   return `${baseUrl}${url}`;
 };
 
-export const get = (url, req) => {
-  return fetch(baseUrl(url, req));
+export const get = (url, req, user) => {
+  return fetch(baseUrl(url, req), {
+    headers: {
+      cookie: `user=${user}`
+    }
+  });
 };
 
-export const post = ({ url, body }, req) => {
+export const post = ({ url, body, user }, req) => {
   return fetch(baseUrl(url, req), {
     method: 'post',
     body: JSON.stringify(body),
-    headers: { 'Content-Type': 'application/json' }
+    headers: {
+      'Content-Type': 'application/json',
+      cookie: `user=${user}`
+    }
   });
 };

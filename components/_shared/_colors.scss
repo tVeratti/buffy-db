@@ -1,6 +1,9 @@
 $primary: #80354b;
+$primary-dark: mix($primary, black, 80);
+$primary-light: mix($primary, white, 50);
+
 $secondary: #9c8e95;
-$contrast: #7fc0e6;
+$contrast: #56cbf9;
 
 $base: #eee;
 

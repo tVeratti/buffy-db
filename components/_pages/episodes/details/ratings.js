@@ -1,31 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-import Table from '../../../table';
+import Context from '../../../context';
 import Rating from './rating';
 
 import './ratings.scss';
 
-export default ({ _id, rating }) => (
-  <div className="details__ratings">
-    <h4>Ratings</h4>
-    <Table
-      rows={[
-        {
-          label: 'Average',
-          content: (
-            <Rating
-              _id={_id}
-              name="avg"
-              rating={rating.average}
-              readonly={true}
-            />
-          )
-        },
-        {
-          label: 'You',
-          content: <Rating _id={_id} name="you" rating={rating.user} />
-        }
-      ]}
-    />
-  </div>
-);
+export default ({ _id, rating }) => {
+  const user = useContext(Context);
+  return (
+    <div className="details__ratings">
+      {user && <Rating _id={_id} name="you" rating={rating.user} />}
+      {!user && <a href="/auth/google">Login to vote!</a>}
+    </div>
+  );
+};

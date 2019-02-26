@@ -1,0 +1,11 @@
+@import './colors';
+
+.bold {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.subtle {
+  color: $dark-subtle;
+  font-size: 12px;
+}

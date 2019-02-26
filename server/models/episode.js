@@ -11,6 +11,7 @@ const episode = new Schema({
   air_date: Date,
   use_viewers: Number,
   teaser: String,
+  season: String,
   ratings: {
     default: [],
     type: [

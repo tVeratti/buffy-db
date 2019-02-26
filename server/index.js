@@ -47,6 +47,8 @@ app
       app.render(req, res, '/episodes', req.params);
     });
 
+    server.get('/', (req, res) => res.redirect('/episodes'));
+
     server.get('*', (req, res) => {
       return handle(req, res);
     });

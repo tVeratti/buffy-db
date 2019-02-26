@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const client = require('../contentful').client;
 
 const ObjectId = mongoose.Types.ObjectId;
 const Episode = require('../models/episode');
@@ -44,7 +45,8 @@ const aggregation = userId => ({
     teleplay_by: 1,
     air_date: 1,
     use_viewers: 1,
-    teaser: 1
+    teaser: 1,
+    season: 1
   }
 });
 
@@ -56,8 +58,11 @@ const one = (_id, user) =>
 const rate = (_id, user, value) =>
   Episode.findOne({ _id }).then(episode => {
     const ratings = episode.ratings.filter(e => e.user != user);
+    episode.season = '1';
     episode.ratings = [...ratings, { user, value }];
     return episode.save();
   });
 
-module.exports = { all, one, rate };
+const content = () => client.getEntries({ content_type: 'episode' });
+
+module.exports = { all, one, rate, content };

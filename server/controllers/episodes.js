@@ -1,12 +1,17 @@
 const express = require('express');
+const { getCookie } = require('nookies');
 const router = express.Router();
 
 const Episodes = require('../domain/episodes');
 const { getUser } = require('../util/user');
 
 router.get('/', (req, res) => {
-  const user = getUser(req.cookies);
-  Episodes.all(user).then(episodes => res.json(episodes));
+  const user = getUser(req.cookies || req.headers.cookie);
+  Episodes.all(user).then(episodes =>
+    Episodes.content().then(content => {
+      res.json({ episodes, content });
+    })
+  );
 });
 
 router.post('/rate', (req, res) => {

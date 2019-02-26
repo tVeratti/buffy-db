@@ -4,10 +4,8 @@ import reducer from './reducer';
 export const Context = createContext();
 
 export const Provider = ({ initial, children }) => {
-  const [episodes, dispatch] = useReducer(reducer, initial);
+  const [store, dispatch] = useReducer(reducer, initial);
   return (
-    <Context.Provider value={{ episodes, dispatch }}>
-      {children}
-    </Context.Provider>
+    <Context.Provider value={{ store, dispatch }}>{children}</Context.Provider>
   );
 };

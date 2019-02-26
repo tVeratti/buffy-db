@@ -13,13 +13,17 @@ const findEpisode = memoize((episodes, number) =>
 );
 
 export default ({ active }) => {
-  const { episodes } = useContext(Context);
+  const { episodes, content } = useContext(Context).store;
   const episode = findEpisode(episodes, active);
 
   if (!episode) return null;
 
   return (
     <div key={episode.number} className="episodes__details details">
+      <div
+        className="details__background"
+        style={{ backgroundImage: `url(${content[episode._id]})` }}
+      />
       <div className="details__header">
         <div className="details__number">
           ep.# <span>{padStart(episode.number, 3, '0')}</span>

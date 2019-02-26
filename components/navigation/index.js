@@ -2,10 +2,9 @@ import Link from 'next/link';
 import './navigation.scss';
 
 const Navigation = ({ user }) => {
-  console.log(user);
   const paths = [
-    { label: 'Home', to: '/' },
-    { label: 'Episodes', to: '/episodes' }
+    { label: 'Episodes', to: '/' }
+    //{ label: 'Episodes', to: '/episodes' }
   ];
 
   const pathNodes = paths.map((p, i) => (

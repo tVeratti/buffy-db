@@ -5,16 +5,17 @@
   width: 100%;
   padding: 20px;
   margin: 2px 0;
-  color: mix($primary, white, 50);
+  color: $primary-light;
   border-radius: 5px;
   cursor: pointer;
 
   &:hover {
+    color: $base;
     background: rgba(black, 0.1);
   }
 
   &.episode--active {
     color: $base;
-    background: rgba(black, 0.2);
+    background: $primary-dark;
   }
 }
