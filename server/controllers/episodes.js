@@ -7,10 +7,11 @@ const { getUser } = require('../util/user');
 
 router.get('/', (req, res) => {
   const user = getUser(req.cookies || req.headers.cookie);
-  Episodes.all(user).then(episodes =>
-    Episodes.content().then(content => {
-      res.json({ episodes, content });
-    })
+  Episodes.all(user).then(
+    episodes =>
+      // Episodes.content().then(content => {
+      res.json({ episodes, content })
+    //})
   );
 });
 
