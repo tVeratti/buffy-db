@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
   Episodes.all(user).then(
     episodes =>
       // Episodes.content().then(content => {
-      res.json({ episodes, content })
+      res.json({ episodes })
     //})
   );
 });
