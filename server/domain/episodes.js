@@ -44,7 +44,7 @@ const aggregation = userId => ({
     story_by: 1,
     teleplay_by: 1,
     air_date: 1,
-    use_viewers: 1,
+    us_viewers: 1,
     teaser: 1,
     season: 1
   }

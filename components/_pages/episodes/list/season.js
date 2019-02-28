@@ -4,14 +4,18 @@ import classnames from 'classnames';
 
 import './season.scss';
 
-export default ({ season, isActive, setState }) => {
+export default ({ season, first, isActive, setState }) => {
   const className = classnames('season', {
     'season--active': isActive
   });
 
   return (
     <li>
-      <Link href={`/episodes`} passHref>
+      <Link
+        href={`/episodes?number=${first}`}
+        as={`/episodes/${first}`}
+        passHref
+      >
         <a className={className} onClick={() => setState(season)}>
           <span className="season__number">{season}</span>
         </a>

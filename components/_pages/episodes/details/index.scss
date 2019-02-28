@@ -6,6 +6,17 @@
   padding: 20px 0;
 }
 
+.episodes__details {
+  position: relative;
+}
+.episodes__select {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 24px;
+  transform: translate(-50%, -50%);
+}
+
 // .details__background {
 //   position: fixed;
 //   top: 0;

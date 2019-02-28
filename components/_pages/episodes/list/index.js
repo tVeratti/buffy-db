@@ -16,6 +16,10 @@ const getSeasons = memoize(episodes =>
   uniq(flatten(episodes.map(e => e.season)))
 );
 
+const getFirstEpisode = memoize(
+  (episodes, season) => episodes.filter(e => e.season == season)[0] || {}
+);
+
 const getEpisodes = memoize((episodes, season, filter) =>
   episodes.filter(
     e =>
@@ -31,8 +35,6 @@ const setArrowTop = () => {
   const arrow = document.querySelector('.episodes__list .arrow');
 
   if (!episode) {
-    arrow.style.top = 0;
-    arrow.style.opacity = 0;
   } else {
     const { offsetHeight, offsetTop } = episode.parentElement;
     arrow.style.top = offsetTop + offsetHeight / 2 + 'px';
@@ -54,14 +56,19 @@ export default ({ active }) => {
     <div className="episodes__sidebar">
       <Placeholder fallback={<Loading />}>
         <ul className="episodes__seasons">
-          {seasons.map(s => (
-            <Season
-              key={s}
-              season={s}
-              isActive={s == season}
-              setState={setSeason}
-            />
-          ))}
+          {seasons.map(s => {
+            const first = getFirstEpisode(store.episodes, s).number;
+
+            return (
+              <Season
+                key={s}
+                season={s}
+                first={first}
+                isActive={s == season}
+                setState={setSeason}
+              />
+            );
+          })}
         </ul>
         <ul className="episodes__list">
           <li className="episodes__filter-wrapper">

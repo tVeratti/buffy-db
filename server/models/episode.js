@@ -9,7 +9,7 @@ const episode = new Schema({
   story_by: String,
   teleplay_by: String,
   air_date: Date,
-  use_viewers: Number,
+  us_viewers: Number,
   teaser: String,
   season: String,
   ratings: {
