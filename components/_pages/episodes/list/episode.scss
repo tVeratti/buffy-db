@@ -2,11 +2,11 @@
 
 .episode {
   display: block;
+  position: relative;
   width: 100%;
   padding: 20px;
   margin: 2px 0;
   color: $primary-light;
-  border-radius: 5px;
   cursor: pointer;
 
   &:hover {
@@ -17,5 +17,20 @@
   &.episode--active {
     color: $base;
     background: $primary-dark;
+
+    &:after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      width: 0;
+      height: 0;
+      transform: translateY(-50%);
+
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+
+      border-right: 10px solid $base;
+    }
   }
 }

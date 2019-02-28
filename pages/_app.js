@@ -28,7 +28,6 @@ export default class MyApp extends App {
       <Container>
         <div className="app">
           <Context.Provider value={user}>
-            <Navigation user={user} />
             <Component {...pageProps} user={user} />
           </Context.Provider>
         </div>

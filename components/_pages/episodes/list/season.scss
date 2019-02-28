@@ -1,0 +1,15 @@
+@import '../../../_shared/base';
+
+.season {
+  padding: 10px 20px;
+  border: none;
+  background: none;
+  color: $primary-light;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 22px;
+
+  &--active {
+    color: $base;
+    //background: $primary;
+  }
+}

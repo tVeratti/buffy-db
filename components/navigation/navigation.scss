@@ -1,8 +1,15 @@
 @import '../_shared/colors';
+.header {
+  color: $base;
+  background: $dark;
+  line-height: 50px;
+  text-align: center;
+}
 
 .nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  // background: $primary-light;
 }
 
 .nav__list,
