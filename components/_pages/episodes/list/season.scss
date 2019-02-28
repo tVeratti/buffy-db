@@ -1,15 +1,58 @@
 @import '../../../_shared/base';
 
 .season {
-  padding: 10px 20px;
+  display: block;
+  position: relative;
+  height: 20px;
+  width: 20px;
+  margin: 10px;
   border: none;
-  background: none;
-  color: $primary-light;
-  font-family: 'Roboto Mono', monospace;
-  font-size: 22px;
+  border-radius: 50%;
+  background: $primary;
+  cursor: pointer;
+
+  &:hover {
+    background: $contrast;
+
+    .season__number {
+      transform: translate(-50%, -50%) scale(1);
+      transition: transform cubic(0.2s);
+    }
+  }
+
+  &:active {
+    background: mix($contrast, black, 80);
+    .season__number {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
 
   &--active {
-    color: $base;
-    //background: $primary;
+    background: $primary-light;
   }
+}
+
+$size: 30px;
+.season__number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: $size;
+  height: $size;
+  line-height: $size;
+
+  color: $base;
+  font-family: 'Nova Mono', monospace;
+  font-size: 18px;
+  text-align: center;
+
+  border-radius: 50%;
+  background: inherit;
+  transform: translate(-50%, -50%) scale(0);
+  transform-origin: center;
+  backface-visibility: hidden;
 }

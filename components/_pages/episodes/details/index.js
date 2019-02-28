@@ -27,7 +27,8 @@ export default ({ active }) => {
         <General {...episode} />
       </div>
 
-      <div className="details__section">
+      <div className="details__main">
+        <h4>Your Rating</h4>
         <Ratings {...episode} />
       </div>
     </div>

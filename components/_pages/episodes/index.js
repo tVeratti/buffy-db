@@ -11,7 +11,6 @@ export default ({ number, initial }) => {
   return (
     <Provider initial={initial}>
       <div className="view episodes">
-        <Navigation />
         <List active={number} />
         <Details active={number} />
       </div>

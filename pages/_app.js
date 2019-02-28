@@ -6,11 +6,11 @@ import './_reset.scss';
 import './_app.scss';
 
 import Navigation from '../components/navigation';
-import Context from '../components/context';
+import UserContext from '../components/userContext';
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
-    const { user } = parseCookies(ctx);
+    const { user = '' } = parseCookies(ctx);
 
     let pageProps = {};
 
@@ -27,9 +27,10 @@ export default class MyApp extends App {
     return (
       <Container>
         <div className="app">
-          <Context.Provider value={user}>
-            <Component {...pageProps} user={user} />
-          </Context.Provider>
+          <UserContext.Provider value={user}>
+            {/* <Navigation /> */}
+            <Component {...pageProps} />
+          </UserContext.Provider>
         </div>
       </Container>
     );

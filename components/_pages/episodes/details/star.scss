@@ -9,9 +9,11 @@
   background: none;
   border: none;
   transition: transform cubic();
+  cursor: pointer;
 
   label {
     display: inline-block;
+    cursor: pointer;
   }
 
   svg {

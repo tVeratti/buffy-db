@@ -1,0 +1,21 @@
+@import '../_shared/base';
+
+.arrow {
+  position: absolute;
+  right: 0;
+  transition: top bounce(0.8s);
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    transform: translateY(-50%);
+
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid $base;
+  }
+}

@@ -1,13 +1,3 @@
 @import 'colors';
 @import 'transitions';
-@import 'helpers';
-
-body {
-  color: $dark;
-}
-
-a {
-  display: inline-block;
-  color: inherit;
-  text-decoration: none;
-}
+@import 'type';

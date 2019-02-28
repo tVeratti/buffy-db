@@ -1,6 +1,9 @@
 .details {
+  display: flex;
   position: relative;
+  flex-direction: column;
   margin-left: 2rem;
+  padding: 20px 0;
 }
 
 // .details__background {
@@ -22,8 +25,7 @@
   line-height: 1.3;
 }
 
-.details__section {
+.details__main {
+  flex: 1;
   padding: 10px;
-  background: white;
-  border-radius: 5px;
 }

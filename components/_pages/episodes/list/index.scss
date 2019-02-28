@@ -1,18 +1,58 @@
 @import '../../../_shared/base';
 
+$border-radius: 10px;
+
 .episodes__sidebar {
   display: flex;
   align-items: stretch;
 }
 
 .episodes__seasons {
-  background: $primary-dark;
+  padding: 10px;
+  background: mix($primary, black, 70);
+  //border-radius: $border-radius 0 0 $border-radius;
 }
 
 .episodes__list {
+  position: relative;
   flex: 1;
   max-height: 100%;
   background: $primary;
   background: linear-gradient(to top, $primary-dark, $primary);
   overflow-y: auto;
+  //border-radius: 0 $border-radius $border-radius 0;
+}
+
+$icon-size: 16px;
+$icon-left: 20px;
+.episodes__filter-wrapper {
+  position: relative;
+  padding: 10px 20px;
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: $icon-left;
+    width: $icon-size;
+    height: $icon-size;
+    transform: translateY(-50%);
+    fill: $primary-light;
+  }
+}
+
+.episodes__filter {
+  width: 100%;
+  padding: 10px;
+  padding-left: $icon-size + 10px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(white, 0.1);
+  color: $base;
+  //background: rgba(black, 0.15);
+  font-family: inherit;
+  font-size: 14px;
+
+  &:focus {
+    outline: none;
+  }
 }

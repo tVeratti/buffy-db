@@ -1,5 +1,9 @@
 @import '../../../_shared/base';
 
+.details__general {
+  padding-bottom: 10px;
+}
+
 .details__title {
   font-size: 32px;
 }
@@ -18,7 +22,7 @@
   transform: rotate(-180deg);
 
   span {
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Nova Mono', monospace;
     font-size: 52px;
   }
 }

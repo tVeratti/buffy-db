@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import Link from 'next/link';
 
-import Context from '../context';
+import UserContext from '../userContext';
 
 import './navigation.scss';
 
 const Navigation = () => {
-  const { user } = useContext(Context);
+  const user = useContext(UserContext);
+  console.log(user);
 
   const paths = [
     { label: 'Episodes', to: '/' }
@@ -23,17 +24,16 @@ const Navigation = () => {
 
   return (
     <React.Fragment>
-      <div className="header">Buffy DB</div>
       <div className="nav">
+        <h1 className="nav__title">
+          <span className="buffy">Buffy</span>
+          <span>DATABASE</span>
+        </h1>
         {/* <ul className="nav__list">{pathNodes}</ul> */}
-        <ul className="nav__user">
-          <li className="nav__item">
-            {/* prettier-ignore */
-            user
-            ? <a href="/auth/logout">Logout</a>
-            : <a href="/auth/google">Login</a>}
-          </li>
-        </ul>
+        {/* prettier-ignore */
+        user
+          ? <a href="/auth/logout">Logout</a>
+          : <a href="/auth/google">Login</a>}
       </div>
     </React.Fragment>
   );
