@@ -4,7 +4,8 @@ import classnames from 'classnames';
 
 import './season.scss';
 
-export default ({ season, first, isActive, setState }) => {
+export default ({ season, isActive }) => {
+  const { first, number } = season;
   const className = classnames('season', {
     'season--active': isActive
   });
@@ -12,12 +13,12 @@ export default ({ season, first, isActive, setState }) => {
   return (
     <li>
       <Link
-        href={`/episodes?number=${first}`}
-        as={`/episodes/${first}`}
+        href={`/episodes?number=${first.number}`}
+        as={`/episodes/${first.number}`}
         passHref
       >
-        <a className={className} onClick={() => setState(season)}>
-          <span className="season__number">{season}</span>
+        <a className={className}>
+          <span className="season__number">{number}</span>
         </a>
       </Link>
     </li>

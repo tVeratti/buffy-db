@@ -8,6 +8,7 @@ import Details from './details';
 import './index.scss';
 
 export default ({ number, initial }) => {
+  console.log(number, initial);
   return (
     <Provider initial={initial}>
       <div className="view episodes">
