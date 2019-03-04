@@ -44,6 +44,7 @@ app
 
     // Masked routes
     server.get('/episodes/:number', (req, res) => {
+      console.log('ssr');
       app.render(req, res, '/episodes', req.params);
     });
 

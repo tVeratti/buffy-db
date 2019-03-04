@@ -7,8 +7,6 @@ import './navigation.scss';
 
 const Navigation = () => {
   const user = useContext(UserContext);
-  console.log(user);
-
   const paths = [
     { label: 'Episodes', to: '/' }
     //{ label: 'Episodes', to: '/episodes' }

@@ -18,8 +18,9 @@ const mapContent = initial => {
 class Page extends PureComponent {
   static getInitialProps = async ({ req, user, ...props }) => {
     const res = await get('/api/episodes', req, user);
-    const { episodes } = await res.json();
-    return { episodes };
+    const { episodes, content } = await res.json();
+
+    return { episodes, content: mapContent(content) };
   };
 
   render() {

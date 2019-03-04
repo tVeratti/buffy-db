@@ -5,14 +5,12 @@ const router = express.Router();
 const Episodes = require('../domain/episodes');
 const { getUser } = require('../util/user');
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   const user = getUser(req.cookies || req.headers.cookie);
-  Episodes.all(user).then(
-    episodes =>
-      // Episodes.content().then(content => {
-      res.json({ episodes })
-    //})
-  );
+  const episodes = await Episodes.all(user);
+  const content = await Episodes.content();
+
+  res.json({ episodes, content });
 });
 
 router.post('/rate', (req, res) => {

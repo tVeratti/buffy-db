@@ -15,11 +15,12 @@
 .details__number {
   width: 7rem;
   margin-right: 2rem;
-  color: mix($dark, $base, 30);
+  color: rgba($base, 0.3);
   text-align: right;
   border-left: 1px solid mix($dark, $base, 30);
   writing-mode: vertical-rl;
   transform: rotate(-180deg);
+  text-shadow: none;
 
   span {
     font-family: 'Nova Mono', monospace;

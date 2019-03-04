@@ -13,9 +13,10 @@ export default ({ title, number, isActive }) => {
       <Link
         href={`/episodes?number=${number}`}
         as={`/episodes/${number}`}
+        shallow
         passHref
       >
-        <a className={className}>{title}</a>
+        <span className={className}>{title}</span>
       </Link>
     </li>
   );
