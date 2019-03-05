@@ -17,8 +17,8 @@ export default ({ season, isActive }) => {
         as={`/episodes/${first.number}`}
         passHref
       >
-        <a className={className}>
-          <span className="season__number">{number}</span>
+        <a className={className} title={`Season ${number}`}>
+          <span className="season__number" />
         </a>
       </Link>
     </li>

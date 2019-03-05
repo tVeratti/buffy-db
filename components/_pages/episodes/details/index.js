@@ -44,19 +44,24 @@ export default ({ active, season }) => {
         <General {...episode} />
       </div>
       <div className="details__main">
-        <Table
-          rows={[
-            { label: 'Season', content: episode.season },
-            {
-              label: 'Air Date',
-              content:
-                episode.air_date && new Date(episode.air_date).toDateString()
-            },
-            { label: 'Viewers', content: episode.us_viewers }
-          ]}
-        />
-        <h4>Your Rating</h4>
-        <Ratings {...episode} />
+        <div className="details__section">
+          <h4>Your Rating</h4>
+          <Ratings {...episode} />
+        </div>
+        <div className="details__section">
+          <h4>Details</h4>
+          <Table
+            rows={[
+              { label: 'Season', content: episode.season },
+              {
+                label: 'Air Date',
+                content:
+                  episode.air_date && new Date(episode.air_date).toDateString()
+              },
+              { label: 'Viewers', content: episode.us_viewers }
+            ]}
+          />
+        </div>
       </div>
     </div>
   );

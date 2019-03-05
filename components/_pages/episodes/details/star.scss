@@ -19,7 +19,7 @@
   svg {
     vertical-align: top;
     stroke-width: 3px;
-    stroke: $base;
+    stroke: $primary;
     fill: transparent;
   }
 
@@ -54,5 +54,8 @@
 
   &--readonly {
     pointer-events: none;
+    svg {
+      stroke: $base;
+    }
   }
 }

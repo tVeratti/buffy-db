@@ -49,5 +49,13 @@ $image-height: 500px;
 
 .details__main {
   flex: 1;
+  padding: 10px 0;
+  padding-right: 10px;
+}
+
+.details__section {
+  margin: 10px 0;
   padding: 10px;
+  background: white;
+  line-height: 1.3;
 }
