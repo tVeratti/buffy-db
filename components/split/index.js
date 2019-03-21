@@ -1,58 +1,43 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import debounce from 'lodash/debounce';
 import classnames from 'classnames';
 import './split.scss';
 
-export default class Split extends Component {
-  state = { active: null, lastActive: null };
+export default class Split extends PureComponent {
+  state = { active: 'left' };
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.number !== this.props.number) {
+      if (nextProps.number > this.props.number) this.activateRight();
+      else this.activateLeft();
+    }
+  };
 
   activateLeft = () => this.setActive('left');
   activateRight = () => this.setActive('right');
   deactivate = () => this.setActive(null);
   setActive = debounce(active => {
-    const { active: lastActive } = this.state;
-    if (active === lastActive) return;
-    this.setState({ active, lastActive });
+    const { active: prevActive } = this.state;
+    if (active !== prevActive) this.setState({ active, animate: false });
+    setTimeout(() => this.setState({ animate: true }), 100);
   }, 10);
 
-  renderHalf(text, description, index) {
-    const { active, lastActive } = this.state;
-    const side = index ? 'right' : 'left';
-
-    const halfClassName = classnames('split__half', `split__half--${side}`, {
-      'split__half--active': active === side,
-      'split__half--last-active': lastActive === side
-    });
-
-    const onMouseEnter = index ? this.activateRight : this.activateLeft;
-
+  renderHalf(header, index) {
     return (
-      <div className={halfClassName} onMouseLeave={this.deactivate}>
-        <div className="split__background" aria-hidden="true" />
-        <div className="split__content">
-          <div className="split__description">{description}</div>
-          <button className="split__button">{text}</button>
-          <button className="split__action" onMouseEnter={onMouseEnter}>
-            <span className="split__text">{text}</span>
-          </button>
-        </div>
+      <div className="split__half" key={index}>
+        <div className="split__content">{header}</div>
       </div>
     );
   }
 
   render() {
-    const { active } = this.state;
+    const { headers } = this.props;
+    const { active, animate } = this.state;
     const className = classnames('split', {
-      [`split--${active}`]: active
+      [`split--${active}`]: active,
+      'split--animate': animate
     });
 
-    return (
-      <div className="split__wrapper">
-        <div className={className} ref={this.setWrapperRef}>
-          {this.renderHalf('x')}
-          {this.renderHalf('y', 1)}
-        </div>
-      </div>
-    );
+    return <div className={className}>{headers.map(this.renderHalf)}</div>;
   }
 }

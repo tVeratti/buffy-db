@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
-import { TransitionGroup } from 'react-transition-group';
+import React, { useContext, useState, useEffect } from 'react';
 import memoize from 'memoize-one';
 
+import usePrevious from '../../../hooks/previous';
+import Split from '../../../split';
 import Table from '../../../table';
 import { Context } from '../context';
 import Image from './image';
@@ -14,6 +15,7 @@ const findEpisode = memoize((episodes, number) =>
 
 export default ({ active, season }) => {
   const { episodes, content } = useContext(Context).store;
+  const prevActive = usePrevious(active);
   const episode = findEpisode(episodes, active);
 
   if (!episode)
@@ -23,13 +25,16 @@ export default ({ active, season }) => {
       </div>
     );
 
+  const prev = findEpisode(episodes, prevActive);
+
   return (
     <div className="episodes__details details">
-      <div className="episodes__carousel">
-        <TransitionGroup component={null}>
-          <Image key={episode._id} {...episode} content={content} />
-        </TransitionGroup>
-      </div>
+      <Split
+        headers={[
+          <Image {...prev} content={content} />,
+          <Image {...episode} content={content} />
+        ]}
+      />
       <div className="details__main">
         <div className="details__section">
           <h4>Your Rating</h4>

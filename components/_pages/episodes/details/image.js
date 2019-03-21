@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { CSSTransition } from 'react-transition-group';
 import padStart from 'lodash/padStart';
 
 import useParallax from '../../../hooks/parallax';
@@ -12,28 +11,20 @@ export default ({ content, ...episode }) => {
   const imageURL = content[episode._id] || content['-1'];
 
   return (
-    <CSSTransition
-      in={query.number == episode.number}
-      key={episode.number}
-      timeout={300}
-      classNames="swipe"
-      unmountOnExit
-    >
-      <div className="swipe">
-        <div
-          className="details__image"
-          style={{
-            backgroundImage: `url('${imageURL}')`,
-            backgroundPositionY: top
-          }}
-        />
-        <div className="details__header">
-          <div className="details__number">
-            ep.# <span>{padStart(episode.number, 3, '0')}</span>
-          </div>
-          <General {...episode} />
+    <React.Fragment>
+      <div
+        className="details__image"
+        style={{
+          backgroundImage: `url('${imageURL}')`,
+          backgroundPositionY: top
+        }}
+      />
+      <div className="details__header">
+        <div className="details__number">
+          ep.# <span>{padStart(episode.number, 3, '0')}</span>
         </div>
+        <General {...episode} />
       </div>
-    </CSSTransition>
+    </React.Fragment>
   );
 };

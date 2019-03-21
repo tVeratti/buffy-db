@@ -25,49 +25,6 @@ $image-height: 500px;
   transform: translate(-50%, -50%);
 }
 
-.episodes__carousel {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 500px;
-  border-bottom-left-radius: 10px;
-  overflow: hidden;
-}
-
-$show-path-enter: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-$hide-path-enter: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
-
-$show-path-exit: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-$hide-path-exit: polygon(0 0, 0 0, 0 100%, 0 100%);
-
-.swipe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background: $dark;
-  clip-path: $show-path-exit;
-  transition: clip-path 0.3s ease-in-out;
-  backface-visibility: hidden;
-}
-
-.swipe-enter {
-  clip-path: $hide-path-enter;
-}
-
-.swipe-enter-active {
-  z-index: 2;
-  clip-path: $show-path-enter;
-}
-.swipe-exit {
-  clip-path: $show-path-exit;
-  transition-delay: 0.01s;
-}
-.swipe-exit-active {
-  clip-path: $hide-path-exit;
-}
-
 .details__image {
   z-index: -1;
   height: 100%;
