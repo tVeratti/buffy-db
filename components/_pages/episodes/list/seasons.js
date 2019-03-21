@@ -1,11 +1,15 @@
 import Season from './season';
 
-export default ({ seasons, active }) => {
+export default ({ seasons, active, setOpen, setSeason }) => {
   return (
     <ul className="episodes__seasons">
       {seasons.map(s => {
+        const onClick = () => {
+          setOpen(true);
+          setSeason(s);
+        };
         return (
-          <Season key={s.number} season={s} isActive={s.number == active} />
+          <Season key={s} season={s} isActive={s == active} onClick={onClick} />
         );
       })}
     </ul>

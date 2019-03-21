@@ -4,23 +4,20 @@ import classnames from 'classnames';
 
 import './season.scss';
 
-export default ({ season, isActive }) => {
-  const { first, number } = season;
+export default ({ number, isActive, onClick }) => {
   const className = classnames('season', {
     'season--active': isActive
   });
 
   return (
     <li>
-      <Link
-        href={`/episodes?number=${first.number}`}
-        as={`/episodes/${first.number}`}
-        passHref
+      <button
+        className={className}
+        title={`Season ${number}`}
+        onClick={onClick}
       >
-        <a className={className} title={`Season ${number}`}>
-          <span className="season__number" />
-        </a>
-      </Link>
+        <span className="season__number" />
+      </button>
     </li>
   );
 };

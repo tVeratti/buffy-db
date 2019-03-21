@@ -31,10 +31,7 @@ class Page extends PureComponent {
         <Head>
           <title>Buffy Database</title>
         </Head>
-        <Episodes
-          initial={{ episodes, content }}
-          number={router.query.number}
-        />
+        <Episodes initial={{ episodes, content }} router={router} />
       </React.Fragment>
     );
   }

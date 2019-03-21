@@ -4,19 +4,22 @@ import classnames from 'classnames';
 
 import './episode.scss';
 
-export default ({ title, number, isActive }) => {
+export default ({ title, number, isActive, onClick, blocked }) => {
   const className = classnames('episode', {
-    'episode--active': isActive
+    'episode--active': isActive,
+    'episode--blocked': blocked
   });
   return (
     <li>
       <Link
-        href={`/episodes?number=${number}`}
-        as={`/episodes/${number}`}
+        href={!blocked && `/episodes?number=${number}`}
+        as={!blocked && `/episodes/${number}`}
         shallow
         passHref
       >
-        <span className={className}>{title}</span>
+        <span className={className} onClick={onClick}>
+          {title}
+        </span>
       </Link>
     </li>
   );

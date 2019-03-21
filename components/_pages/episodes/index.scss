@@ -1,5 +1,8 @@
 .episodes {
-  display: grid;
-  grid-template-columns: 350px auto;
+  padding-left: 325px;
   height: 100%;
+
+  @media (max-width: 720px) {
+    padding-left: 60px;
+  }
 }

@@ -21,6 +21,7 @@ const setArrowTop = () => {
   const arrow = document.querySelector('.episodes__list .arrow');
 
   if (!episode) {
+    arrow.style.opacity = 0;
   } else {
     const { offsetHeight, offsetTop } = episode.parentElement;
     arrow.style.top = offsetTop + offsetHeight / 2 + 'px';
@@ -28,7 +29,7 @@ const setArrowTop = () => {
   }
 };
 
-export default ({ episodes: all, active, season }) => {
+export default ({ episodes: all, active, season, onClick, blocked }) => {
   const [filter, setFilter] = useState('');
   const episodes = getEpisodes(all, season, filter);
   useEffect(setArrowTop, [active, season]);
@@ -42,11 +43,16 @@ export default ({ episodes: all, active, season }) => {
         />
         <Filter />
       </li>
+      <li>
+        <h4>Season {season}</h4>
+      </li>
       {episodes.map((e, i) => (
         <Episode
           key={e.number}
           index={i}
           isActive={e.number == active}
+          blocked={blocked}
+          onClick={onClick}
           {...e}
         />
       ))}

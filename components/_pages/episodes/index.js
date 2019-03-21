@@ -7,9 +7,11 @@ import Details from './details';
 
 import './index.scss';
 
-export default ({ number, initial }) => {
+export default ({ router, initial }) => {
+  const number = router.query.number;
+
   return (
-    <Provider initial={initial}>
+    <Provider initial={initial} router={router}>
       <div className="view episodes">
         <List active={number} />
         <Details active={number} />

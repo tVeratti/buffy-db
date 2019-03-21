@@ -18,4 +18,10 @@
     color: $base;
     background: rgba($base, 0.15);
   }
+
+  &:not(.episode--blocked) {
+    &:active {
+      background: rgba($base, 0.25);
+    }
+  }
 }

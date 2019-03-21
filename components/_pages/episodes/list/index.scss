@@ -1,26 +1,62 @@
 @import '../../../_shared/base';
 
 $border-radius: 10px;
+$sidebar-width: 325px;
+$season-width: 60px;
+$list-width: $sidebar-width - $season-width;
 
 .episodes__sidebar {
+  position: fixed;
   display: flex;
   align-items: stretch;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  min-width: $sidebar-width;
+  z-index: 10;
+
+  @media (max-width: 720px) {
+    left: -$list-width;
+
+    .episodes__seasons {
+      order: 1;
+      z-index: 2;
+    }
+    .episodes__list {
+      transform: translateX(0);
+      transition: transform cubic(0.3s);
+    }
+
+    &--open {
+      .episodes__list {
+        transform: translateX($sidebar-width);
+      }
+    }
+
+    .arrow {
+      display: none;
+    }
+  }
 }
 
 .episodes__seasons {
   padding: 10px;
   background: mix($primary, black, 70);
-  //border-radius: $border-radius 0 0 $border-radius;
 }
 
 .episodes__list {
-  position: relative;
   flex: 1;
   max-height: 100%;
   background: $primary;
   background: linear-gradient(to top, $primary-dark, $primary);
   overflow-x: visible;
-  //border-radius: 0 $border-radius $border-radius 0;
+
+  h4 {
+    margin: 10px 0;
+    font-size: 20px;
+    color: $base;
+    text-align: center;
+  }
 }
 
 $icon-size: 16px;

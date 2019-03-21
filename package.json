@@ -33,7 +33,8 @@
     "passport-google-oauth": "^1.0.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
-    "react-suspense-polyfill": "^1.0.2"
+    "react-suspense-polyfill": "^1.0.2",
+    "react-transition-group": "^2.6.1"
   },
   "devDependencies": {
     "autoprefixer": "^9.4.2",

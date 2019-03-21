@@ -1,13 +1,11 @@
 import React, { useContext } from 'react';
+import { TransitionGroup } from 'react-transition-group';
 import memoize from 'memoize-one';
-import padStart from 'lodash/padStart';
 
 import Table from '../../../table';
-import useParallax from '../../../hooks/parallax';
 import { Context } from '../context';
-import General from './general';
+import Image from './image';
 import Ratings from './ratings';
-
 import './index.scss';
 
 const findEpisode = memoize((episodes, number) =>
@@ -15,7 +13,6 @@ const findEpisode = memoize((episodes, number) =>
 );
 
 export default ({ active, season }) => {
-  const top = useParallax(-0.5);
   const { episodes, content } = useContext(Context).store;
   const episode = findEpisode(episodes, active);
 
@@ -26,22 +23,12 @@ export default ({ active, season }) => {
       </div>
     );
 
-  const imageURL = content[episode._id] || content['-1'];
-
   return (
-    <div key={episode.number} className="episodes__details details">
-      <div
-        className="details__image"
-        style={{
-          backgroundImage: `url('${imageURL}')`,
-          backgroundPositionY: top
-        }}
-      />
-      <div className="details__header">
-        <div className="details__number">
-          ep.# <span>{padStart(episode.number, 3, '0')}</span>
-        </div>
-        <General {...episode} />
+    <div className="episodes__details details">
+      <div className="episodes__carousel">
+        <TransitionGroup component={null}>
+          <Image key={episode._id} {...episode} content={content} />
+        </TransitionGroup>
       </div>
       <div className="details__main">
         <div className="details__section">
