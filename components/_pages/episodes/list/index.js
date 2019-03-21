@@ -25,9 +25,9 @@ export default ({ active }) => {
   const seasons = getSeasons(episodes);
   const episode = getEpisode(episodes, active);
 
-  const [season, setSeason] = useState(0);
+  const [season, setSeason] = useState(1);
   useEffect(() => {
-    setSeason(episode.season);
+    if (episode) setSeason(episode.season);
     setBlock(true);
     setTimeout(() => setBlock(false), 300);
   }, [active]);
